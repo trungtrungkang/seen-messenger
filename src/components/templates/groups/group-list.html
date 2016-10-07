@@ -1,0 +1,65 @@
+<group-list>
+    <div>
+        <ul class="uk-list uk-list-line">
+            <li class="group-item" each="{{group in this.opts.groups}}" onclick="{{onGroupItemClick}}">
+                <a href="">
+                    <div class="group-avatar">
+                        <i class="uk-icon-group"></i>
+                        <span class="{{nk_offline: !group.is_online, nk_online: group.is_online}}"></span>
+                    </div>
+                    <div class="group-name">{{group.display_name}}</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <style scoped>
+        :scope > div{
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: #fff;
+        }
+
+        .group-item {
+            padding: 5px 10px !important;
+            display: block;
+            float: left;
+            width: 100%;
+            box-sizing: border-box;
+            margin: 0 !important;
+        }
+
+        .group-item:hover{
+            background: #DEDEDE;
+        }
+        
+        .group-item > a {
+            color: #2C3E50;
+            display: flex;
+            color: #2C3E50;
+        }
+        
+        .group-item > a:hover {
+            text-decoration: none;
+        }
+        
+        .group-item .contact-name {
+            margin-left: 10px;
+            font-size: 10pt;
+            padding: 7px 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 135px;
+        }
+        
+        .group-item .group-avatar img, .group-avatar i {
+            max-width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            min-width: 32px;
+            width: 100%
+        }
+    </style>
+</group-list>

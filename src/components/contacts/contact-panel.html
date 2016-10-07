@@ -1,0 +1,100 @@
+<contact-panel>
+    <div class="{{contact-panel: true, contact-panel-minimized: this.state.contactData.isMinimized}}">
+        <div class="contact-panel listChatF">
+            <loading-indicator show="{{this.state.contactData.isFetching}}" />
+            <contact-header contacts="{{this.visibleContacts}}" class="contact-header"/>
+            <contact-body contacts="{{this.visibleContacts}}" class="contact-body"/>
+            <contact-footer class="contact-footer"/>
+        </div>
+    </div>
+
+    <style scoped>
+        .contact-panel{
+            position: fixed;
+            top: 44px;
+            bottom: 0px;
+            width: 252px;
+            right: 1px;
+            background-color: #ececec;
+            font: 400 14px/20px "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+            border: none;
+            outline: none;
+            z-index: 100;
+        }
+        
+        .contact-body {
+            position: absolute;
+            top: 0px;
+            bottom: 30px;
+            left: 0px;
+            right: 0px;
+            border: 1px solid #aaa;
+        }
+        
+        .contact-footer {
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            border: 1px solid #aaa;
+            border-top: 1px solid rgba(0, 0, 0, .10);
+        }
+        
+        .contact-header {
+            position: absolute;
+            height: 29px;
+            left: 0px;
+            right: 0px;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #3498db;
+            color: #FFF;
+            font-size: 12px;
+            border-bottom: none;
+            line-height: 29px;
+        }
+        
+        @media (min-width: 1200px) {
+            .contact-panel{
+                top: 44px;
+            }
+            .contact-header {
+                display: hidden;
+            }
+        }
+        
+        @media (max-width: 1200px) {
+            .contact-panel{
+                top: initial;
+                height: 400px;
+            }
+            .contact-body {
+                top: 30px;
+            }
+            .contact-header {
+                display: block;
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
+                border: 1px solid #29487d;
+                border-bottom: 1px solid rgba(0, 0, 0, .10);
+                height: 29px;
+            }
+            .contact-panel.contact-panel-minimized {
+                top: auto;
+                bottom: 0px;
+                height: 30px;
+            }
+            .contact-panel.contact-panel-minimized .contact-header {
+                color: #555;
+                background-color: #f6f7f9;
+                border: 1px solid rgba(29, 49, 91, .3);
+            }
+            .contact-panel.contact-panel-minimized .contact-footer {
+                display: none !important;
+            }
+            .contact-panel.contact-panel-minimized .contact-body {
+                display: none !important;
+            }
+        }
+    </style>
+</contact-panel>

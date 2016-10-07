@@ -1,0 +1,58 @@
+<conversation-item>
+    <div>
+        <div class="avatar">
+            <img src="{{this.avatarURL}}" width="100%">
+        </div>
+        <div class="{{message: true, new: this.unreadCount}}">
+            <div class="time uk-float-right" time = "{{this.time}}" riot-tag = "conversation-time"></div>
+            <div class="title">{{this.title}}</div>
+            <div class="content" title="{{this.content}}">
+                <div class="unread-count uk-badge uk-badge-notification uk-float-right" if = "{{this.unreadCount}}">{{this.unreadCount}}</div>
+                {{this.content}}
+            </div>
+        </div>
+    </div>
+
+    <style scoped>
+        :scope .avatar {
+            max-width: 44px;
+            height: 44px;
+            min-width: 44px;
+            float: left;
+            margin-right: 10px;
+        }
+
+        :scope .message{
+            display: block;
+        }
+
+        :scope .message.new .content{
+            font-weight: bold;
+            color: #000;
+        }
+        
+        :scope .title {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            max-width: 200px;
+            overflow: hidden;
+            font-size: 13px;
+        }
+
+        :scope .time{
+            font-weight: normal;
+        }
+
+        :scope .content{
+            text-overflow: ellipsis;
+            max-width: 200px;
+            overflow: hidden;
+            height: 24px;
+            line-height: 24px;
+            white-space: nowrap;
+            color: #90949c;
+            font-size: 12px;
+            clear: right;
+        }
+    </style>
+</conversation-item>

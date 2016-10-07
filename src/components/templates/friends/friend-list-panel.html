@@ -1,0 +1,105 @@
+<friend-list-panel class = "{{friend-list-minimized: this.state.contactData.isMinimized}}">
+    <div class="friend-list listChatF">
+        <loading-indicator show="{{this.state.contactData.isFetching}}"></loading-indicator>
+        <friend-list-header contacts="{{this.visibleContacts}}"></friend-list-header>
+        <friend-list contacts="{{this.visibleContacts}}"></friend-list>
+        <friend-list-search></friend-list-search>
+    </div>
+
+    <style scoped>
+        :scope {
+            position: fixed;
+            top: 44px;
+            bottom: 0px;
+            width: 252px;
+            right: 1px;
+            background-color: #ececec;
+            font: 400 14px/20px "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+            border: none;
+            outline: none;
+            z-index: 100;
+        }
+
+        friend-list{
+            position: absolute;
+            top: 0px;
+            bottom: 30px;
+            left: 0px;
+            right: 0px;
+            border: 1px solid #aaa;
+        }
+
+        friend-list-search{
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            border: 1px solid #aaa;
+            border-top: 1px solid rgba(0, 0, 0, .10);
+        }
+
+        friend-list-header{
+            position: absolute;
+            height: 29px;
+            left: 0px;
+            right: 0px;
+            font-weight: bold;
+            cursor: pointer;
+            background-color: #0e76bc;
+            color: #FFF;
+            font-size: 12px;
+            border-bottom: none;
+            line-height: 29px;
+        }
+
+        @media (min-width: 1200px) {
+            :scope {
+                top: 44px;
+            }
+
+            friend-list-header{
+                display: hidden;
+            }
+        }
+
+        @media (max-width: 1200px){
+             :scope {
+                top: initial;
+                height: 400px;
+            }
+
+            friend-list{
+                top: 30px;
+            }
+
+            friend-list-header{
+                display: block;
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
+                border: 1px solid #29487d;
+                border-bottom: 1px solid rgba(0, 0, 0, .10);
+                height: 29px;
+            }
+
+            :scope.friend-list-minimized{
+                top: auto;
+                bottom: 0px;
+                height: 30px;
+            }
+
+            :scope.friend-list-minimized friend-list-header{
+                color: #555;
+                background-color: #f6f7f9;
+                border: 1px solid rgba(29, 49, 91, .3);
+            }
+
+            :scope.friend-list-minimized friend-list-search{
+                display: none !important;
+            }
+
+            :scope.friend-list-minimized friend-list{
+                display: none !important;
+            }
+        }
+    </style>
+</friend-list-panel>

@@ -1,0 +1,33 @@
+<fixed-layout>
+    <div class="fixed-layout-container">
+        <yield/>
+    </div>
+
+    <style scoped>
+        :scope .fixed-layout-container{
+            position: fixed;
+            top: 35px;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+        }
+
+        :scope *[layout="left"]{
+            position: relative;
+            width: 200px;
+            float: left;
+        }
+
+        :scope *[layout="right"]{
+            position: relative;
+            width: 200px;
+            float: right;
+        }
+
+        @media (max-width: 1200px){
+            :scope *[layout="right"]{
+                top: auto;
+            }
+        }
+    </style>
+</fixed-layout>

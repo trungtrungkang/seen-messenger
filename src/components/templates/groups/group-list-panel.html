@@ -1,0 +1,35 @@
+<group-list-panel>
+    <div>
+        <loading-indicator show="{{this.state.groupData.isLoading}}"></loading-indicator>
+        <div groups="{{this.visibleGroups}}" riot-tag="group-list" class="group-list"></div>
+        <div riot-tag="group-search" class="group-search"></div>
+    </div>
+
+    <style scoped>
+        :scope {
+            width: 252px;
+            background-color: #ececec;
+            font: 400 14px/20px "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+            border: none;
+            outline: none;
+        }
+        
+        .group-list {
+            position: absolute;
+            top: 0px;
+            bottom: 30px;
+            left: 0px;
+            right: 0px;
+            border: 1px solid #aaa;
+        }
+        
+        .group-search {
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            border: 1px solid #aaa;
+            border-top: 1px solid rgba(0, 0, 0, .10);
+        }
+    </style>
+</group-list-panel>

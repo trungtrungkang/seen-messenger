@@ -1,0 +1,30 @@
+<chatbox-manager>
+    <div>
+        <chatbox-dropdown class="chatbox-dropdown" chatboxes="{{this.chatboxes}}" show="{{this.chatboxes.length > 4}}"/>
+        <ul class="uk-grid uk-container-center uk-flex-row-reverse chatbox-container">
+            <li class="chatbox-item" each="{{chatbox in this.chatboxes}}" chatbox="{{chatbox}}" riot-tag="chatbox"/>
+        </ul>
+    </div>
+    <style scoped>
+        :scope > div{
+            position: fixed;
+            right: 260px;
+            height: 1px;
+            left: 0px;
+            bottom: 0px;
+            z-index: 101;
+            font: 400 14px/20px "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+        }
+
+        .chatbox-item,
+        .chatbox-dropdown{
+            padding-left: 20px !important;
+            float: left;
+        }
+
+        .chatbox-dropdown > div{
+            z-index: 99999;
+            bottom: 40px;
+        }
+    </style>
+</chatbox-manager>

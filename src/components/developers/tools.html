@@ -1,0 +1,34 @@
+<develop-tools>
+    <div class="uk-button-dropdown" data-uk-dropdown="{mode:'click'}">
+        <button class="uk-button">Develop Tools <i class="uk-icon-caret-down"></i></button>
+        <div class="uk-dropdown uk-dropdown-bottom">
+            <ul class="uk-nav uk-nav-dropdown">
+                <li class="uk-nav-header" if='{{user}}'>Hello, {{user.name || user.display_name || user.email}}</li>
+                <li class="uk-nav-divider" if='{{user}}'></li>
+                <li class="uk-nav-header">Accounts</li>
+                <li><a onclick="{{onAutoLoginButtonClick}}">Auto Login</a></li>
+                <li class="uk-nav-divider"></li>
+                <li><a onclick="{{onLoginButtonClick}}">Login</a></li>
+                <li><a onclick="{{onSignupButtonClick}}">Signup</a></li>
+                <li class="uk-nav-divider" if='{{user}}'></li>
+                <li><a onclick="{{onUpdateProfileButtonClick}}" if='{{user}}'>Update Profile</a></li>
+                <li><a onclick="{{onLogoutButtonClick}}" if='{{user}}'>Logout</a></li>
+                <li class="uk-nav-header">Roster</li>
+                <li><a onclick="{{onAddPartnerButtonClick}}">Add partner</a></li>
+                <li><a onclick="{{onGetOnlinePartnersButtonClick}}">Get online partners</a></li>
+                <li class="uk-nav-header">Conversations</li>
+                <li><a onclick="{{onGetMembersButtonClick}}">Get members</a></li>
+                <li><a onclick="{{onAddMemberButtonClick}}">Add member</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <style scoped>
+        :scope{
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 99999;
+        }
+    </style>
+</develop-tools>

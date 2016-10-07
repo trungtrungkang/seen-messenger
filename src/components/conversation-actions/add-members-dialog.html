@@ -1,0 +1,64 @@
+<conversation-add-members-dialog>
+    <div class="uk-modal">
+        <div class="uk-modal-dialog">
+            <form class="uk-form">
+                <fieldset>
+                    <legend>Members in conversation</legend>
+                    <div class="uk-form-row">
+                        <virtual each="{{member in this.members}}">
+                            <div class="uk-badge">{{member.name}}</div>
+                        </virtual>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Add members to conversation</legend>
+                    <div class="uk-form-row">
+                        <table class="uk-table uk-table-hover">
+                            <colgroup>
+                                <col width="300">
+                                <col width="">
+                            </colgroup>
+                            <tbody>
+                                <tr each="{{contact in this.contacts}}" onclick="{{onSelectContactItem}}">
+                                    <td>{{contact.name}}</td>
+                                    <td>
+                                        <i class="{{uk-icon-square-o: !contact.selected, uk-icon-check-square-o: contact.selected}}"></i>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <div class="uk-form-row dialog-footer">
+                        <button class="uk-button uk-button-danger" onclick="{{onCancelButtonClick}}">Cancel</button>
+                        <button class="uk-button uk-button-primary" onclick="{{onOKButtonClick}}">OK</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <style scoped>
+        .uk-modal {
+            background-color: transparent;
+        }
+        
+        .uk-modal-dialog {
+            width: 400px;
+            border: 1px solid rgba(0, 0, 0, .45);
+            border-bottom: 1px solid #666;
+        }
+        
+        .dialog-footer {
+            background-color: #f2f2f2;
+            border-top: 1px solid #ccc;
+            text-align: right;
+            margin-left: -20px;
+            margin-right: -20px;
+            margin-bottom: -20px;
+            margin-top: 20px;
+            padding: 5px;
+        }
+    </style>
+</conversation-add-members-dialog>

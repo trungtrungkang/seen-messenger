@@ -1,0 +1,25 @@
+<conversation-actions>
+    <ul class="uk-navbar-nav">
+        <li>
+            <a onclick="{{onAddMembersButtonClick}}"><span class="uk-icon-user-plus"></span></a>
+        </li>
+        <li class="uk-parent" data-uk-dropdown="{mode:'click'}">
+            <a><i class="uk-icon-caret-down"></i></a>
+            <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom chatbox-header--more-actions">
+                <ul class="uk-nav uk-nav-navbar">
+                    <li onclick="{{onEditTitleActionItemClick}}"><a>Edit Conversation Name</a></li>
+                    <li><a>Edit Participants</a></li>
+                    <li class="uk-nav-divider"></li>
+                    <li if="{{isOwner()}}" onclick="{{onDeleteConversationActionItemClick}}"><a>Delete Conversation</a></li>
+                    <li if="{{!isOwner()}}" onclick="{{onLeaveConversationActionItemClick}}"><a>Leave Conversation</a></li>
+                </ul>
+            </div>
+        </li>
+    </ul>
+    <div style="width:1px;height:0px;">
+        <conversation-update-title-dialog/>
+        <conversation-add-members-dialog/>
+        <conversation-delete-conversation-dialog/>
+        <conversation-leave-conversation-dialog/>
+    </div>
+</conversation-actions>

@@ -1,0 +1,51 @@
+<group-search>
+    <div class="search-panel">
+        <div class="input-search">
+            <span class="uk-icon-search"></span>
+            <input type="text" class="form-control" placeholder="Search" onkeyup="{{keyup}}"/>
+        </div>
+    </div>
+    <style scoped>
+        .search-panel {
+            height: 30px;
+            width: 100%;
+            background: #fff;
+            display: block;
+        }
+        
+        .search-panel span.glyphicon.glyphicon-search {
+            position: absolute;
+        }
+        
+        .search-panel input {
+            height: 28px;
+            border-radius: 0;
+            border: none;
+            padding-left: 25px;
+            box-shadow: none;
+            outline: none;
+            border-bottom: none;
+            width: 100%;
+            margin: 0px;
+            box-sizing: border-box;
+        }
+        
+        .search-panel .input-search {
+            position: relative;
+        }
+        
+        .search-panel .input-search span {
+            position: absolute;
+            left: 6px;
+        }
+        
+        .search-panel a {
+            margin-right: 5px;
+        }
+        
+        .search-panel span {
+            margin-top: 8px;
+            color: #444;
+        }
+    </style>
+</group-search>

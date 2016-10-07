@@ -1,0 +1,273 @@
+<group-chat-box>
+    <div class="chatbox-container-outmost">
+        <div class="{{chatbox-container: true, chatbox-container--open: true, chatbox--active: opts.chatbox.isActive}}" show="{{!opts.chatbox.isMinimized}}">
+            <div class="chatbox-header" onclick="{{toggleWindow}}">
+                <div class="chatbox-header--avatar">
+                    <img src="https://{{common.config.seenlife_domain}}/{{partner.avatar}}">
+                </div>
+                <div class="chatbox-header--status">
+                    <div class="{online: partner.is_online, offline: !partner.is_online}">&nbsp;</div>
+                </div>
+                <div class="chatbox-header--title">
+                    <a href="https://{{common.config.seenlife_domain}}{{partner.profile_url}}" target="_blank" onclick="event.stopPropagation();">
+                        {{partner.display_name}}
+                    </a>
+                </div>
+                <div class="chatbox-header--close">
+                    <a onclick="{{closeWindow}}"><span class="uk-icon-remove" id="icon-close"></span></a>
+                </div>
+            </div>
+            <div class="chatbox-body">
+                <message-box conv_id="{{opts.chatbox.id}}"></message-box>
+                <div class="new-msg-alert uk-badge uk-badge-danger uk-float-left new-msg-indicator" if="{{this.hasNewMessage && !isScrolledToBottom}}"
+                    onclick="{{onNewMsgAlertClick}}">
+                    <span>Scroll down to see new message</span>
+                </div>
+            </div>
+            <div class="chatbox-footer">
+                <post-message name="post-message" conv_id="{{opts.chatbox.id}}" />
+                <action-toolbar name="action-toolbar" conv_id="{{opts.chatbox.id}}" select-emoticon="{{onSelectEmoticon}}" />
+            </div>
+        </div>
+        <div class="chatbox-container chatbox-container--minimized" show="{{opts.chatbox.isMinimized}}">
+            <div class="chatbox-header" onclick="{{toggleWindow}}">
+                <div class="uk-badge uk-badge-danger uk-float-left new-msg-indicator" if="{{this.chatbox.hasNewMessage}}">new</div>
+                <div class="chatbox chatbox-header--status">
+                    <div class="{{online: partner.is_online, offline: !partner.is_online}}">&nbsp;</div>
+                </div>
+                <div class="chatbox-header--title">
+                    {{partner.display_name}}
+                </div>
+                <div class="chatbox-header--close">
+                    <a onclick="{{closeWindow}}"><span class="uk-icon-remove" id="icon-close"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style scoped>
+        .chatbox-container--open {
+            position: absolute;
+            width: 250px;
+            height: 380px;
+            position: relative;
+            z-index: 9999;
+            bottom: 390px;
+            /*margin-right: 10px;*/
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+        
+        .chatbox-container--minimized {
+            position: absolute;
+            width: 250px;
+            height: 30px;
+            position: relative;
+            z-index: 9999;
+            bottom: 40px;
+            /*margin-right: 10px;*/
+            margin-top: 10px;
+            box-sizing: border-box;
+        }
+        
+        .chatbox-header--title {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 1;
+            max-width: 140px;
+            overflow: hidden;
+        }
+        
+        .chatbox-container--minimized .chatbox-header--title {
+            max-width: 180px;
+        }
+        
+        .chatbox-container--minimized .chatbox-header {
+            background-color: #fff !important;
+            color: #555 !important;
+            border: 1px solid #ddd !important;
+        }
+        
+        .chatbox-container--minimized .new-msg-indicator,
+        .chatbox-container--minimized .chatbox-header--status,
+        .chatbox-container--minimized .chatbox-header--title {
+            position: static;
+            float: left;
+            margin-left: 5px;
+        }
+        
+        .chatbox-container--minimized .new-msg-indicator {
+            margin-top: 10px;
+        }
+        
+        .chatbox-container--minimized .chatbox-header--status {
+            margin-top: 1px;
+        }
+        
+        .chatbox-container--minimized .chatbox-header--title {
+            margin-top: 2px;
+        }
+        
+        .chatbox-container--minimized .chatbox-header--close a:hover {
+            color: #555;
+        }
+        
+        .chatbox-header {
+            position: absolute;
+            height: 30px;
+            background: #7f8990;
+            color: #191919;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            border: 1px solid #696a6b;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .chatbox--active .chatbox-header {
+            background-color: #0e76bc;
+            color: #fff;
+            box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .20);
+            border: 1px solid #29487d;
+        }
+        
+        .chatbox-header--avatar {
+            position: absolute;
+            left: 0px;
+            width: 40px;
+            top: 12px;
+            text-align: center;
+            z-index: 1;
+        }
+        
+        .chatbox-header--avatar img {
+            border-radius: 50%;
+            min-width: 32px;
+            max-width: 32px;
+            width: 32px;
+            height: 32px;
+        }
+        
+        .chatbox-header--status {
+            position: absolute;
+            left: 40px;
+            width: 7px;
+            top: 0px;
+            bottom: 0px;
+            padding-top: 2px;
+            vertical-align: middle;
+            text-align: center;
+        }
+        
+        .chatbox-header--status div {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            display: inline-block;
+            vertical-align: middle;
+            text-align: center;
+        }
+        
+        .chatbox-header--status div.online {
+            background-color: #88e241;
+        }
+        
+        .chatbox-header--status div.offline {
+            background-color: #ccc;
+        }
+        
+        .chatbox-header--title {
+            position: absolute;
+            left: 52px;
+            right: 30px;
+            top: 0px;
+            bottom: 0px;
+            vertical-align: middle;
+            font-weight: bold;
+            padding-top: 6px;
+        }
+        
+        .chatbox-header--title span {}
+        
+        .chatbox-header--title a {
+            text-decoration: none;
+            cursor: pointer;
+            color: #fff;
+        }
+        
+        .chatbox-header--title a:hover {
+            text-decoration: underline;
+        }
+        
+        .chatbox-header--close {
+            position: absolute;
+            right: 0px;
+            width: 20px;
+            top: 0px;
+            bottom: 0px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-top: 2px;
+        }
+        
+        .chatbox-header--close a {
+            color: #e3e9f5;
+        }
+        
+        .chatbox-header--close a:hover {
+            color: #fff;
+        }
+        
+        .chatbox-body {
+            position: absolute;
+            top: 30px;
+            bottom: 55px;
+            left: 0px;
+            right: 0px;
+            background-color: #fff;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            padding: 8px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        
+        audio.message-content--preview,
+        video.message-content--preview,
+        img.message-content--preview {
+            max-width: 200px;
+            max-height: 250px;
+        }
+        
+        .chatbox-footer {
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            height: 55px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        
+        .badboy {
+            width: 0;
+            height: 0;
+            clear: both;
+        }
+
+        .new-msg-alert {
+            position: absolute;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            padding: 4px;
+            opacity: 0.8;
+            margin: 0px;
+            font-size: 9px;
+            cursor: pointer;
+        }
+    </style>
+</group-chat-box>

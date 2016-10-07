@@ -1,0 +1,84 @@
+<create-new-group>
+    <div class="uk-button-dropdown" data-uk-dropdown="{mode: 'click'}" onclick="{{onPreventClosingDialog}}">
+        <a class="uk-link-button create-group-button">Create Group <i class="uk-icon-caret-down"></i></a>
+        <div class="uk-dropdown uk-dropdown-width-3 uk-dropdown-bottom">
+            <div class="uk-grid uk-dropdown-grid">
+                <div class="uk-width-1-2">
+                    <div class="group-field-header">Group Name</div>
+                    <div class="uk-form">
+                        <input type="text" placeholder="Group Name" class="group-name-input">
+                    </div>
+                    <div class="group-field-header">Members</div>
+                    <div class="uk-form member-list-panel">
+                        <virtual each="{{member in this.members}}">
+                            <div class="uk-badge">{{member.display_name}}</div>
+                        </virtual>
+                    </div>
+                    <div if = "{{errorMessage}}" class="uk-text-danger">
+                        {{errorMessage}}
+                    </div>
+                </div>
+                <div class="uk-width-1-2">
+                    <div class="group-field-header">Select members</div>
+                    <div class="select-contact-panel">
+                        <table class="uk-table uk-table-hover">
+                            <colgroup>
+                                <col width="">
+                                <col width="">
+                            </colgroup>
+                            <tbody>
+                                <tr each="{{contact in this.contacts}}" onclick="{{onSelectContactItem}}">
+                                    <td>{{contact.display_name}}</td>
+                                    <td><input type="checkbox" checked="{{contact.selected}}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div>
+                        <button class="uk-button uk-button-danger" onclick="{{onCancelButtonClick}}">Cancel</button>
+                        <button class="uk-button uk-button-primary" onclick="{{onCreateButtonClick}}">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style scoped>
+        .uk-dropdown {
+            border-radius: 3px;
+            border: 1px solid #ddd;
+            -webkit-box-shadow: -2px 2px 10px 0px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: -2px 2px 10px 0px rgba(0, 0, 0, 0.75);
+            box-shadow: -2px 2px 10px 0px rgba(0, 0, 0, 0.75);
+            z-index: 1000;
+        }
+        
+        .group-field-header {
+            padding: 5px 0px;
+            text-transform: uppercase;
+            font-weight: 700;
+            font-size: 12px;
+        }
+        
+        .padding-left-15 {
+            padding: 5px 15px;
+        }
+        
+        .member-list-panel {
+            height: 223px;
+            overflow: auto;
+            border: 1px solid #e5e5e5;
+            padding: 8px;
+        }
+        
+        .select-contact-panel {
+            height: 300px;
+            overflow: auto;
+            border: 1px solid #e5e5e5;
+            margin-left: 0px !important;
+            margin-right: 5px !important;
+            margin-bottom: 5px !important;
+            background-color: #fff;
+        }
+    </style>
+</create-new-group>

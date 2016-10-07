@@ -1,0 +1,72 @@
+<chat-room>
+    <div class="uk-width-2-3 uk-container-center chat-room-container">
+        <div class="left-panel">
+            <div class="conversation-panel" riot-tag="conversation-panel"></div>
+        </div>
+        <div class="message-pane" each="{{conv in this.state.conversationData.conversations}}" show="{{conv.isActive}}" conv="{{conv}}"
+            riot-tag="message-pane" />
+    </div>
+    <friend-list-panel></friend-list-panel>
+    <style>
+        .uk-modal{
+            top: 42px;
+        }
+
+        @media (max-width: 991px) {
+            .uk-modal {
+                top: 35px;
+            }
+        }
+    </style>
+    <style scoped>
+        :scope {
+            position: fixed;
+            left: 0px;
+            right: 0px;
+            top: 42px;
+            bottom: 0px;
+            background-color: #ececec;
+            overflow: hidden;
+            z-index: 999;
+        }
+        
+        .chat-room-container {
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            right: 260px;
+        }
+
+        .left-panel{
+            position: absolute;
+            left: 0px;
+            width: 250px;
+            top: 2px;
+            bottom: 0px;
+        }
+        
+        .conversation-panel {
+            position: absolute;
+            left: 0px;
+            right: 0px;
+            top: 0px;
+            bottom: 0px;
+        }
+        
+        .message-pane {
+            position: absolute;
+            left: 255px;
+            right: 200px;
+            top: 2px;
+            bottom: 0px;
+            border: 1px solid #aaa;
+            min-width: 400px;
+        }
+        
+        @media (max-width: 991px) {
+            :scope {
+                top: 35px;
+            }
+        }
+    </style>
+</chat-room>

@@ -1,0 +1,64 @@
+<photo-message>
+    <div class="message-content-container">
+        <div class="{{uk-flex: !previewURL, uk-flex-middle: !previewURL}}">
+            <div if="{{previewURL}}">
+                <a href="{{previewURL}}" data-uk-lightbox data-lightbox-type="image" title="{{name}}">
+                    <img class="message-content--preview" src="{{previewURL}}" width="auto" height="auto" alt="{{name}}">
+                </a>
+            </div>
+            <i class="uk-icon-small uk-margin-right uk-icon-file-image-o" if="{{!previewURL }}"></i>
+            <div>
+                <div class="message-content--title">{{name}}</div>
+                <ul class="uk-comment-meta uk-subnav">
+                    <li class="uk-margin-small-left uk-disabled"><a href="#">size: {{size}}</a></li>
+                    <li class="uk-margin-small-left uk-disabled" show="{{uploading}}">
+                        <a href="#">
+                            <i class="uk-icon-refresh uk-icon-spin uk-margin-small-right"></i>{{progress}}
+                        </a>
+                    </li>
+                    <li class="uk-margin-small-left uk-disabled" show="{{downloading}}">
+                        <a href="#">
+                            <i class="uk-icon-refresh uk-icon-spin uk-margin-small-right"></i>{{progress}}
+                        </a>
+                    </li>
+                    <li class="{{uk-margin-small-left:true, uk-disabled: downloading}}" show="{{!blob && !downloading}}">
+                        <a onclick="{{onPreviewButtonClick}}">
+                            <i class="uk-icon-play-circle-o uk-icon-small"></i>
+                        </a>
+                    </li>
+                    <li class="uk-margin-small-left" show="{{!downloading && token}}">
+                        <a onclick="{{onDownloadButtonClick}}">
+                            <i class="uk-icon-cloud-download uk-icon-small"></i>
+                        </a>
+                    </li>
+                    <!--<li class="uk-margin-small-left" show="{{uploading || downloading}}">
+                        <a onclick="{{onCancelButtonClick}}">
+                            <i class="uk-icon-remove uk-icon-small"></i>
+                        </a>
+                    </li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <style scoped>
+        .message-content-container {
+            /*min-width: 250px;*/
+        }
+        
+        .message-content--preview {
+            max-width: 300px;
+            max-height: 300px;
+            margin: 0;
+            top: 50%;
+            left: 50%;
+            margin-right: -50%;
+            transform: translate(-50%, 0%);
+            position: relative;
+        }
+        
+        .message-content--title {
+            word-break: break-all;
+        }
+    </style>
+</photo-message>

@@ -1,0 +1,57 @@
+<member-list>
+    <div class="member-list-container">
+    <div style="position: absolute; top: 0px; left: 0px; right: 0px;">
+        <ul class="uk-subnav uk-subnav-line">
+            <li><a onclick="{{onCloseFormButtonClick}}">Close</a></li>
+            <li data-uk-dropdown="{mode:'click'}">
+                <a href="#">Add members <i class="uk-icon-caret-down"></i></a>
+                <!-- This is the dropdown -->
+                <div class="uk-dropdown uk-dropdown-bottom contacts-dropdown-modal">
+                    <ul class="uk-nav uk-nav-dropdown">
+                        <li>
+                            <div class="uk-form-icon uk-margin-left">
+                                <i class="uk-icon-search"></i>
+                                <input type="text" placeholder="Search" onkeyup="{{onSearchKeyup}}">
+                            </div>
+                        </li>
+                        <li if="{{contacts.length == 0}}" class="uk-disabled">
+                            <div class="uk-form uk-margin-left">
+                                <label>The list is empty.</label>
+                            </div>
+                        </li>
+                        <li each="{{contact in contacts}}">
+                            <a onclick="{{onAddMemberButtonClick}}">{{contact.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div style="position: absolute; top: 35px;left:0px; width: 0px;">
+        <p>Members</p>
+    </div>
+    <div style="position: absolute; top: 50px; bottom: 0px; left: 0px; right: 0px;">
+        <ul class="uk-nav">
+            <li each="{{member in this.members}}" class="group-member-item">
+                <a href="#">
+                    <img width="35px" height="35px" src="https://getuikit.com/docs/images/placeholder_200x100.svg" alt="">                    {{member.name}}
+                </a>
+            </li>
+        </ul>
+    </div>
+    </div>
+    <style scoped>
+        .member-list-container{
+            position: absolute;
+            left: 10px;
+            top: 10px;
+            right: 10px;
+            bottom: 10px;
+        }
+        .group-member-item {}
+        
+        .contacts-dropdown-modal {
+            box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
+        }
+    </style>
+</member-list>

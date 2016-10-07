@@ -1,0 +1,90 @@
+<conversation-panel>
+    <div>
+        <div class="conversation-header">
+            <nav class="uk-navbar">
+                <ul class="uk-navbar-nav">
+                    <li class="uk-navbar-content uk-text-truncate">
+                        <img class="avatar" src="{{getAvatarById(user.userId)}}">
+                        <span class="uk-text-bold">{{user.name || user.email}}</span>
+                    </li>
+                </ul>
+                <div class="uk-navbar-flip">
+                    <ul class="uk-navbar-nav">
+                        <li class="uk-parent" data-uk-dropdown="{mode:'click'}">
+                            <a><i class="uk-icon-cog"></i></a>
+                            <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom chatbox-header--more-actions">
+                                <ul class="uk-nav uk-nav-navbar">
+                                    <li onclick="{{onUpdateProfileActionItemClick}}"><a>Update Profile</a></li>
+                                    <li onclick="{{onAddFriendActionItemClick}}"><a>Add Friend</a></li>
+                                    <li class="uk-nav-divider"></li>
+                                    <li onclick="{{onLogoutActionItemClick}}"><a>Logout</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <loading-indicator show="{{this.state.conversationData.isLoading}}"></loading-indicator>
+        <conversation-list conversations="{{this.conversations}}" class="conversation-list"></conversation-list>
+        <conversation-search class="conversation-search"></conversation-search>
+        <account-update-profile></account-update-profile>
+        <account-add-friend></account-add-friend>
+    </div>
+
+    <style scoped>
+        :scope {
+            position: fixed;
+            top: 35px;
+            bottom: 0px;
+            width: 252px;
+            right: auto;
+            left: 1px;
+            background-color: #fff;
+            font: 400 14px/20px "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+            border: none;
+            outline: none;
+            border: 1px solid #ccc;
+        }
+        
+        .conversation-header {
+            position: absolute;
+            height: 44px;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            background-color: #ececec;
+        }
+        
+        .conversation-list {
+            position: absolute;
+            top: 44px;
+            bottom: 30px;
+            left: 0px;
+            right: 0px;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+        
+        .conversation-search {
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+        }
+        
+        .conversation-header .avatar {
+            width: 36px;
+            height: 36px;
+            float: left;
+            margin-right: 10px;
+            margin-top: 5px;
+        }
+        
+        @media (min-width: 1200px) {
+            :scope {
+                top: 42px;
+            }
+        }
+    </style>
+</conversation-panel>

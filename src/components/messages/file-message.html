@@ -1,0 +1,56 @@
+<file-message>
+    <div class="message-content-container">
+        <div class="uk-flex uk-flex-middle">
+            <i class="uk-icon-large uk-margin-right {{previewURL}}"></i>
+            <div>
+                <div class="message-content--title">{{name}}</div>
+                <ul class="uk-comment-meta uk-subnav">
+                    <li class="uk-margin-small-left uk-disabled"><a href="#">size: {{size}}</a></li>
+                    <li class="uk-margin-small-left uk-disabled" show="{{uploading}}">
+                        <a href="#">
+                            <i class="uk-icon-refresh uk-icon-spin uk-margin-small-right"></i>{{progress}}
+                        </a>
+                    </li>
+                    <li class="uk-margin-small-left uk-disabled" show="{{downloading}}">
+                        <a href="#">
+                            <i class="uk-icon-refresh uk-icon-spin uk-margin-small-right"></i>{{progress}}
+                        </a>
+                    </li>
+                    <li class="uk-margin-small-left" show="{{!downloading && token}}">
+                        <a onclick="{{onDownloadButtonClick}}">
+                            <i class="uk-icon-cloud-download uk-icon-small"></i>
+                        </a>
+                    </li>
+                    <!--<li class="uk-margin-small-left" show="{uploading || downloading}">
+                        <a onclick="{onCancelButtonClick}">
+                            <i class="uk-icon-remove uk-icon-small"></i>
+                        </a>
+                    </li>-->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <style scoped>
+        .message-content-container {
+            /*min-width: 250px;*/
+        }
+        
+        .message-content--preview {
+            float: left;
+            width: 50px;
+            height: 50px;
+            display: flex;
+        }
+        
+        .message-content--image i {
+            margin: auto;
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .message-content--title{
+            word-break: break-all;
+        }
+    </style>
+</file-message>

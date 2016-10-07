@@ -1,0 +1,335 @@
+<chatbox>
+    <div class="chatbox-container-outmost">
+        <div class="{{chatbox-container: true, chatbox-container--open: true, chatbox--active: opts.chatbox.isActive}}" show="{{!opts.chatbox.isMinimized}}">
+            <div class="chatbox-header">
+                <nav class="uk-navbar">
+                    <ul class="uk-navbar-nav uk-margin-small-left">
+                        <li>
+                            <div class="{{chatbox-header--status: true, online: conv.is_online, offline: !conv.is_online}}">&nbsp;</div>
+                        </li>
+                        <li class="uk-navbar-content uk-text-truncate">
+                            <span title="{{getTitle()}}">{{getTitle()}}</span>
+                        </li>
+                    </ul>
+                    <div class="uk-navbar-flip">
+                        <ul class="uk-navbar-nav">
+                            <li>
+                                <a onclick="{{onAddMembersButtonClick}}"><span class="uk-icon-user-plus"></span></a>
+                            </li>
+                            <li class="uk-parent" data-uk-dropdown="{mode:'click'}">
+                                <a><i class="uk-icon-caret-down"></i></a>
+                                <div class="uk-dropdown uk-dropdown-navbar uk-dropdown-bottom chatbox-header--more-actions">
+                                    <ul class="uk-nav uk-nav-navbar">
+                                        <li><a onclick="{{editTitleActionItemClick}}">Edit Conversation Name</a></li>
+                                        <li><a>Edit Participants</a></li>
+                                        <li class="uk-nav-divider"></li>
+                                        <li><a href="#">See Full Conversation</a></li>
+                                    </ul>
+                                </div>
+                            </li>
+                            <li>
+                                <a onclick="{{onMinimizeButtonClick}}">
+                                    <i class="uk-icon-chevron-down"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a onclick="{{closeWindow}}"><span class="uk-icon-remove" id="icon-close"></span></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </div>
+            <div class="chatbox-body">
+                <ul class="uk-switcher chatbox-body-switcher">
+                    <li class="uk-active">
+                        <message-box conv_id="{{opts.chatbox.conv_id}}"></message-box>
+                        <div class="new-msg-alert uk-badge uk-badge-danger uk-float-left new-msg-indicator" if="{{this.hasNewMessage && !isScrolledToBottom}}"
+                            onclick="{{onNewMsgAlertClick}}">
+                            <span>Scroll down to see new message</span>
+                        </div>
+                    </li>
+                    <li>
+                        <member-list conv_id={{opts.chatbox.conv_id}}/>
+                    </li>
+                </ul>
+            </div>
+            <div class="chatbox-footer">
+                <post-message name="post-message" conv_id="{{opts.chatbox.conv_id}}" />
+                <action-toolbar name="action-toolbar" conv_id="{{opts.chatbox.conv_id}}" select-emoticon="{{onSelectEmoticon}}" />
+            </div>
+        </div>
+        <div class="chatbox-container chatbox-container--minimized" show="{{opts.chatbox.isMinimized}}">
+            <div class="chatbox-header" onclick="{{toggleWindow}}">
+                <div class="uk-badge uk-badge-danger uk-float-left new-msg-indicator" if="{{this.chatbox.hasNewMessage}}">new</div>
+                <div class="{{uk-margin-small-left: true, chatbox-header--status: true, online: conv.is_online, offline: !conv.is_online}}"></div>
+                <div class="chatbox-header--title">
+                    {{conv.title}}
+                </div>
+                <div class="chatbox-header--close">
+                    <a onclick="{{closeWindow}}"><span class="uk-icon-remove" id="icon-close"></span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <conversation-update-title-dialog/>
+        <conversation-add-members-dialog/>
+    </div>
+    <style scoped>
+        .chatbox-container--open {
+            position: absolute;
+            width: 300px;
+            height: 420px;
+            position: relative;
+            z-index: 9999;
+            bottom: 420px;
+            box-sizing: border-box;
+            font-size: 12px;
+        }
+        
+        .chatbox-container--minimized {
+            position: absolute;
+            width: 250px;
+            height: 32px;
+            position: relative;
+            z-index: 9999;
+            bottom: 32px;
+            box-sizing: border-box;
+        }
+        
+        .chatbox-header--title {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            line-height: 1;
+            max-width: 140px;
+            overflow: hidden;
+        }
+        
+        .chatbox-container--minimized .chatbox-header--title {
+            max-width: 180px;
+        }
+        
+        .chatbox-container--minimized .chatbox-header {
+            background-color: #fff !important;
+            color: #555 !important;
+            border: 1px solid #ddd !important;
+            display: flex;
+        }
+        
+        .chatbox-container--minimized .new-msg-indicator,
+        .chatbox-container--minimized .chatbox-header--title {
+            position: static;
+            float: left;
+            margin-left: 5px;
+        }
+        
+        .chatbox-container--minimized .new-msg-indicator {
+            margin-top: 10px;
+        }
+        
+        .chatbox-container--minimized .chatbox-header--title {
+            margin-top: 2px;
+        }
+        
+        .chatbox-container--minimized .chatbox-header--close a:hover {
+            color: #555;
+        }
+        
+        .chatbox-header {
+            position: absolute;
+            height: 32px;
+            background: #7f8990;
+            color: #191919;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            border-top-left-radius: 3px;
+            border-top-right-radius: 3px;
+            /*border: 1px solid #696a6b;*/
+            border-bottom: 1px solid #ddd;
+        }
+        
+        .chatbox--active .chatbox-header {
+            background-color: #0e76bc;
+            color: #fff;
+            /*box-shadow: 0 1px 1px 0 rgba(0, 0, 0, .20);
+            border: 1px solid #29487d;*/
+        }
+        
+        .chatbox-header--avatar img {
+            border-radius: 50%;
+            min-width: 32px;
+            max-width: 32px;
+            width: 32px;
+            height: 32px;
+        }
+        
+        .chatbox-header--group-avatar {
+            color: green;
+            border: 1px solid black;
+            border-radius: 50% 50%;
+            background: white;
+            padding: 3px;
+        }
+        
+        .chatbox-header--status {
+            width: 8px;
+            height: 8px;
+            vertical-align: middle;
+            text-align: center;
+            display: inline-block;
+            border: 1px solid black;
+            border-radius: 50%;
+            background-color: #88e241;
+            margin-top: auto;
+            margin-bottom: auto;
+        }
+        
+        .chatbox-header--status.online {
+            background-color: #88e241;
+        }
+        
+        .chatbox-header--status.offline {
+            background-color: #ccc;
+        }
+        
+        .chatbox-header--title {
+            position: absolute;
+            left: 52px;
+            right: 60px;
+            top: 0px;
+            bottom: 0px;
+            vertical-align: middle;
+            font-weight: bold;
+            padding-top: 6px;
+        }
+        
+        .chatbox-header--title span {}
+        
+        .chatbox-header--title a {
+            text-decoration: none;
+            cursor: pointer;
+            color: #fff;
+        }
+        
+        .chatbox-header--title a:hover {
+            text-decoration: underline;
+        }
+        
+        .chatbox-header--add-member-action {
+            right: 20px;
+        }
+        
+        .chatbox-header--close {
+            right: 0px;
+        }
+        
+        .chatbox-header--close,
+        .chatbox-header--add-member-action {
+            position: absolute;
+            width: 20px;
+            top: 0px;
+            bottom: 0px;
+            display: inline-block;
+            vertical-align: middle;
+            margin-top: 2px;
+        }
+        
+        .chatbox-header--close a,
+        .chatbox-header--add-member-action a {
+            color: #e3e9f5;
+        }
+        
+        .chatbox-header--close a:hover,
+        .chatbox-header--add-member-action a: hover {
+            color: #fff;
+        }
+        
+        .chatbox-body {
+            position: absolute;
+            top: 33px;
+            bottom: 55px;
+            left: 0px;
+            right: 0px;
+            background-color: #fff;
+            border-left: 1px solid #ddd;
+            border-right: 1px solid #ddd;
+            padding: 8px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        
+        audio.message-content--preview,
+        video.message-content--preview,
+        img.message-content--preview {
+            max-width: 200px;
+            max-height: 250px;
+        }
+        
+        .chatbox-footer {
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            height: 55px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            padding-left: 5px;
+            padding-right: 5px;
+        }
+        
+        .badboy {
+            width: 0;
+            height: 0;
+            clear: both;
+        }
+        
+        .new-msg-alert {
+            position: absolute;
+            left: 0px;
+            right: 0px;
+            bottom: 0px;
+            padding: 4px;
+            opacity: 0.8;
+            margin: 0px;
+            font-size: 9px;
+            cursor: pointer;
+        }
+        
+        .uk-navbar-nav > li {
+            line-height: 30px;
+            color: #fff;
+        }
+        
+        .chatbox-header .uk-navbar {
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+            border: 1px solid #0e76bc;
+            background: #3498db;
+        }
+        
+        .chatbox-header .uk-navbar-content {
+            padding: 0px;
+            height: 30px;
+            line-height: 30px;
+            max-width: 140px;
+        }
+        
+        .uk-navbar-nav > li > a {
+            height: 30px;
+            line-height: 30px;
+            color: #f5f5f5;
+            padding: 0 10px;
+        }
+        
+        .uk-navbar-nav > li > a:hover,
+        .uk-navbar-nav > li > a:focus,
+        .uk-navbar-nav > li.uk-open > a {
+            color: #555;
+        }
+
+        .chatbox-header--more-actions{
+            box-shadow: 0 1px 4px rgba(0, 0, 0, .3);
+        }
+    </style>
+</chatbox>

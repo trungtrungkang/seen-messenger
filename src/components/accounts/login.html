@@ -1,0 +1,50 @@
+<login-form>
+    <div class="uk-modal">
+        <div class="uk-modal-dialog">
+            <form class="uk-form">
+                <fieldset>
+                    <legend>Log in to your account</legend>
+                    <div class="uk-form-row">
+                        <div class="uk-form-icon uk-width-1-1">
+                            <i class="uk-icon-user"></i>
+                            <input class="login-form-email uk-width-1-1" type="email" placeholder="Email address">
+                        </div>
+                    </div>
+                    <div class="uk-form-row">
+                        <div class="uk-form-icon uk-width-1-1">
+                            <i class="uk-icon-lock"></i>
+                            <input class="login-form-password uk-width-1-1" type="password" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="uk-form-row dialog-footer">
+                        <button class="uk-button uk-button-danger" onclick="{{onSignUpButtonClick}}">Sign Up</button>
+                        <button class="uk-button uk-button-primary" onclick="{{onLoginButtonClick}}">Login</button>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+
+    <style scoped>
+        .uk-modal {
+            background-color: transparent;
+        }
+        
+        .uk-modal-dialog {
+            width: 400px;
+            border: 1px solid rgba(0, 0, 0, .45);
+            border-bottom: 1px solid #666;
+        }
+        
+        .dialog-footer {
+            background-color: #f2f2f2;
+            border-top: 1px solid #ccc;
+            text-align: right;
+            margin-left: -20px;
+            margin-right: -20px;
+            margin-bottom: -20px;
+            margin-top: 20px;
+            padding: 5px;
+        }
+    </style>
+</login-form>

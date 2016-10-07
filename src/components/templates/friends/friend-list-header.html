@@ -1,0 +1,45 @@
+<friend-list-header>
+    <div onclick="{{onHeaderClicked}}">
+        <div class="nofuser">
+            <span class="online"></span>
+            <span class="name">Online ({{this.onlineContacts.length}})</span>
+        </div>
+    </div>
+
+    <style scoped>
+        :scope > div {
+            height: 29px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        
+        .nofuser {
+            margin-left: 5px;
+            position: absolute;
+            vertical-align: middle;
+            left: 0px;
+            right: auto;
+        }
+        
+        .online {
+            background-color: #88e241;
+            border-radius: 50%;
+            width: 10px;
+            height: 10px;
+            margin-top: auto;
+            margin-bottom: auto;
+            margin-right: 5px;
+            margin-left: 5px;
+            display: inline-block;
+        }
+        
+        .name {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 120px;
+            line-height: 1;
+            font-weight: 700;
+        }
+    </style>
+</friend-list-header>

@@ -1,0 +1,29 @@
+<action-toolbar>
+    <ul class="uk-subnav">
+        <li class="uk-form-file">
+            <a href=""><i class="{{uk-icon-picture-o: true, uk-icon-small: opts.itemSize == 'small'}}"></i></a>
+            <input type="file" onchange="{{onSelectFiles}}" multiple>
+        </li>
+        <li data-uk-dropdown="{delay: 500, mode: 'click'}">
+            <a href="" onclick="{{onEmoticonButtonClick}}"><i class="{{uk-icon-smile-o: true, uk-icon-small: opts.itemSize == 'small'}}"></i></a>
+            <div class="uk-dropdown uk-dropdown-small">
+                <emoticon-tab name="emoticon-tab" conv_id="{{this.conv_id}}" select-emoticon="{{onSelectEmoticon}}"></emoticon-tab>
+            </div>
+        </li>
+    </ul>
+
+    <style scoped>
+        .uk-dropdown {
+            border-radius: 3px;
+            border: 1px solid #ddd;
+            -webkit-box-shadow: -2px 2px 10px 0px rgba(0, 0, 0, 0.75);
+            -moz-box-shadow: -2px 2px 10px 0px rgba(0, 0, 0, 0.75);
+            box-shadow: -2px 2px 10px 0px rgba(0, 0, 0, 0.75);
+        }
+
+        .uk-subnav > li{
+            padding: 0px;
+            margin-left: 10px;
+        }
+    </style>
+</action-toolbar>

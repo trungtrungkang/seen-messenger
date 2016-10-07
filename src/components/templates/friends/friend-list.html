@@ -1,0 +1,22 @@
+<friend-list>
+    <div>
+        <ul class="scroll-chatList uk-list uk-list-line">
+            <li class="_frd" each="{{contact in this.opts.contacts}}" onclick="{{click}}">
+                <a href="" class="_itemFrd">
+                    <div class="item avatar size35px">
+                        <img src="https://{{this.common.config.seenlife_domain}}/{{contact.avatar}}" class="avatar-img" width="100%">
+                        <span class="{{nk_offline: !contact.is_online, nk_online: contact.is_online}}"></span>
+                    </div>
+                    <div class="lr-name">{{contact.display_name}}</div>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <style scoped>
+      :scope > div {
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+      }
+    </style>
+</friend-list>

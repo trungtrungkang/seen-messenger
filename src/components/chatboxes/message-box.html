@@ -1,0 +1,170 @@
+<message-box>
+    <div class="message-box-container" onscroll="{{onMessageBoxContainerScroll}}">
+        <div class="chat">
+            <loading-indicator show="{{conv.isLoadingMessages}}"></loading-indicator>
+            <div class="load-more-history"><button onclick="{{loadMoreHistory}}">More History</button></div>
+            <virtual each="{{msg in this.messages}}">
+                <div class="created-time uk-margin-small" if="{{isInNewDate(msg)}}">
+                    <created-time time="{{msg.created_time}}" />
+                </div>
+
+                <div class="message uk-margin-small-bottom" if="{{isPartner(msg.sender_id)}}">
+                    <img class="avatar" src="{{avatarUrl(msg.sender_id)}}" title="{{displayName(msg.sender_id)}}" />
+                    <div class="message-content">
+                        <p class="trix-content uk-padding-bottom-remove">
+                            <msg-content conv_id="{{parent.conv.id}}" message_id="{{msg.message_id}}" />
+                        </p>
+                        <div class="uk-clearfix" />
+                        <msg-time time="{{msg.created_time}}" class="uk-float-left"></msg-time>
+                    </div>
+                </div>
+                <div class="message me uk-margin-small-bottom" if="{{isOwner(msg.sender_id)}}">
+                    <img class="avatar" src="{{avatarUrl(msg.sender_id)}}" title="{{displayName(msg.sender_id)}}" />
+                    <div class="message-content">
+                        <p class="trix-content">
+                            <msg-content conv_id="{{parent.conv.id}}" message_id="{{msg.message_id}}" />
+                        </p>
+                        <div class="uk-clearfix" />
+                        <msg-time  time="{{msg.created_time}}" class="uk-float-right"></msg-time>
+                        <div class="uk-float-right uk-margin-small-bottom uk-margin-small-right" style="clear: right;" if="{{msg.status != '' && isOwner(msg.sender_id)}}">
+                            <div class="uk-badge msg-sending" if="{{msg.status=='sending'}}">sending...</div>
+                            <div class="uk-badge uk-badge-danger msg-failed" if="{{msg.status=='failed'}}">Message not delivered.</div>
+                        </div>
+                    </div>
+                </div>
+            </virtual>
+        </div>
+    </div>
+
+    <style scoped>
+        :scope,
+        .message-box-container {
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            background-color: #f5f5f5;
+            padding: 8px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        
+        .load-more-history {
+            border: 0;
+            background-color: transparent;
+            clear: both;
+            margin-bottom: 12px;
+            outline: 0;
+        }
+        
+        .load-more-history button {
+            border: none;
+            border-bottom: 1px solid #e5e5e5;
+            width: 100%;
+            box-shadow: none;
+            text-overflow: ellipsis;
+            cursor: pointer;
+            text-decoration: none;
+            overflow: hidden;
+            background-color: transparent;
+            outline: 0;
+            color: #aaa;
+            font-size: 9pt;
+        }
+        
+        .created-time {
+            text-align: center;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            color: #aaa;
+            font-size: 9pt;
+            margin-bottom: 10px;
+        }
+        
+        .chat {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .chat .message {
+            display: flex;
+            margin: 10px 0 0 10px;
+            min-height: 30px;
+            height: auto;
+            text-align: left;
+        }
+        
+        .chat .message.me img.avatar {
+            order: 2;
+            margin: 0 0 0 3px;
+        }
+        
+        .chat .message.me .message-content {
+            order: 1;
+            padding: 0 8px 0 0;
+        }
+        
+        .chat .message.me .trix-content {
+            float: right;
+        }
+        
+        .chat .message.me .message-content:before {
+            position: relative;
+            float: right;
+            content: '';
+            margin: 7px -8px 0 0;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 8px 0 8px 8px;
+            border-color: transparent transparent transparent #fff;
+        }
+        
+        .chat .message img.avatar {
+            display: block;
+            order: 1;
+            margin: 0 10px 0 0;
+            height: 30px;
+            width: 30px;
+            border-radius: 50%;
+            box-sizing: border-box;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+        }
+        
+        .chat .message .message-content {
+            display: block;
+            flex: 1;
+            order: 2;
+        }
+        
+        .chat .message .trix-content {
+            display: inline-block;
+            margin: 0;
+            width: auto;
+            padding: 8px 10px 8px 10px;
+            background: #fff;
+            word-wrap: break-word;
+            border-radius: 3px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+        
+        .chat .message .message-content:before {
+            position: relative;
+            float: left;
+            content: '';
+            margin: 7px 0 0 -8px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 8px 8px 8px 0;
+            border-color: transparent #fff transparent transparent;
+        }
+        
+        .emoji {
+            margin-bottom: 0px !important;
+        }
+    </style>
+</message-box>

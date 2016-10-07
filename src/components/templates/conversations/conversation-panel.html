@@ -1,0 +1,46 @@
+<conversation-panel>
+    <div>
+        <loading-indicator show="{{this.state.conversationData.isLoading}}"></loading-indicator>
+        <conversation-list conversations="{{this.conversations}}" class="conversation-list"></conversation-list>
+        <conversation-search class="conversation-search"></conversation-search>
+    </div>
+
+    <style scoped>
+        :scope {
+            position: fixed;
+            top: 35px;
+            bottom: 0px;
+            width: 252px;
+            right: auto;
+            left: 1px;
+            background-color: #fff;
+            font: 400 14px/20px "Helvetica Neue",Helvetica,Arial,sans-serif !important;
+            border: none;
+            outline: none;
+        }
+
+        .conversation-list{
+            position: absolute;
+            top: 0px;
+            bottom: 30px;
+            left: 0px;
+            right: 0px;
+            border: 1px solid #aaa;
+        }
+
+        .conversation-search{
+            position: absolute;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            border: 1px solid #aaa;
+            border-top: 1px solid rgba(0, 0, 0, .10);
+        }
+
+        @media (min-width: 1200px) {
+            :scope {
+                top: 42px;
+            }
+        }
+    </style>
+</conversation-panel>
